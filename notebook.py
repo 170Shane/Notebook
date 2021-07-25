@@ -58,7 +58,7 @@ class Notebook:
         return [note for note in self.notes if note.match(filter)]
 
     def _find_note(self, note_id):
-        """Locate the note with thr given ID"""
+        """Locate the note with the given ID"""
         for note in self.notes:
             if note.id == note_id:
                 return note

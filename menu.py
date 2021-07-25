@@ -6,12 +6,12 @@ class Menu:
     """Display a menu and respond to choices when run"""
 
     def __init__(self):
-        self.notebook = Notebook()
+        self.notebook = Notebook()  # initialise a new Notebook
         self.choices = {
             "1": self.show_notes,
-            "2": self.search_notes,
+            # "2": self.search_notes,
             "3": self.add_note,
-            "4": self.modify_note,
+            # "4": self.modify_note,
             "5": self.quit
         }
 
@@ -32,36 +32,37 @@ class Menu:
         while True:
             self.display_menu()
             choice = input("Please enter an option: ")
-            action = self.choices.get(choice)
+            action = self.choices.get(choice)  # set 'action' = dictionary choice i.e. name of function
             if action:
-                action()
+                action()  # execute the chosen function
             else:
-                print(f"{choice} is not a valid choice")
+                print(f"{choice} is not a valid choice")  # else display friendly message to user
 
     def show_notes(self, notes=None):
-        if not notes:
-            notes = self.notebook.notes
-        for note in notes:
-            print(f"{note.id}: {note.tags}\n{note.memo}")
-
-    def search_notes(self):
-        filter = input("Search for: ")
-        notes = self.notebook.search(filter)
-        self.show_notes(notes)
-
+        if not notes:  # if we are not being passed a list of notes that have been filtered for a match
+            notes = self.notebook.notes  # display all notes in the Notebook
+        for note in notes:  # loop through the notes collection
+            print(f"{note.id}: {note.tags}\n{note.memo}")  # print out the notes and some additional details
+    #
+    # def search_notes(self):
+    #     filter = input("Search for: ")
+    #     notes = self.notebook.search(filter)
+    #     self.show_notes(notes)
+    #
     def add_note(self):
         memo = input("Enter a memo: ")
-        self.notebook.new_note(memo)
-        print("Your note has ben added")
-
-    def modify_note(self):
-        id = input("Enter a note ID: ")
-        memo = input("Enter a memo: ")
-        tags = input("Enter tags: ")
-        if memo:
-            self.notebook.modify_memo(id, memo)
-        if tags:
-            self.notebook.modify_tags(id, tags)
+        tags = input("Hit me with some tags: ")
+        self.notebook.new_note(memo, tags)
+        print("Your note has been added")
+    #
+    # def modify_note(self):
+    #     id = input("Enter a note ID: ")
+    #     memo = input("Enter a memo: ")
+    #     tags = input("Enter tags: ")
+    #     if memo:
+    #         self.notebook.modify_memo(id, memo)
+    #     if tags:
+    #         self.notebook.modify_tags(id, tags)
 
     def quit(self):
         print("Thank you for using your notebook today.")
